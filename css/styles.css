@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  justify-content: left;
+}
+
+header {
+  font-weight: 600;
+  justify-content: center;
+  background: #562b81;
+  width: 100%;
+  padding: 1rem 0;
+  color: white;
+  margin: 0 auto;
+}
+
+button {
+  display: block;
+  background: #562b81;
+  padding: 0.5rem;
+  width: 5rem;
+  border-radius: 1rem;
+  color: white;
+}
+
+label {
+  display: block;
+}
+
+img {
+  width: 100%;
+}
+
+.row {
+  justify-content: center;
+  align-items: center;
+}

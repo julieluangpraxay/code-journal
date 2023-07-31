@@ -15,14 +15,62 @@
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
+
   <body>
     <header>
-      <div class="container"></div>
+      <!-- entire page parent is "container" -->
+      <div class="container">
+        <!-- parent for "code journal" text on top of page -->
+        <div class="row">
+          <!-- child of row is column-full -->
+          <div class="column-full">Code Journal</div>
+        </div>
+      </div>
     </header>
-    <main class="container">
-      <div data-view="entry-form"></div>
-      <div data-view="entries" class="hidden"></div>
-    </main>
+    <!-- form starts -->
+    <form action="" method="post">
+      <!-- parent of form -->
+      <main class="container">
+        <div data-view="entry-form" class="entry-form">
+          <div class="entry-area">
+            <!-- make a row and column full for new entry header -->
+            <div class="row">
+              <div class="column-full">
+                <h1>New Entry</h1>
+              </div>
+            </div>
+            <!-- row that contains 2 column halfs of img and text boxes -->
+            <div class="row">
+              <div class="column-half">
+                <img
+                  src="./images/placeholder-image-square.jpg"
+                  alt="placeholder blank image" />
+              </div>
+              <!-- title & photo url text box -->
+              <div class="column-half">
+                <label for="title-text"> Title </label>
+                <input type="text" id="title-text" name="title-text" />
+                <label for="photo-url"> Photo URL </label>
+                <input type="url" id="photo-url" name="photo-url" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <!-- note taking text box code-->
+              <label for="notes" class="notes">Notes</label>
+              <textarea id="notes" name="notes" rows="10" cols="80"></textarea>
+              <div data-view="entries" class="hidden"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <button>SAVE</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </form>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>

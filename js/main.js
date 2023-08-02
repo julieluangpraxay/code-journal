@@ -44,15 +44,16 @@ function renderEntry(entry) {
   $otherDiv.className = 'column-half';
 
   const $h1Entry = document.createElement('h1');
-  $h1Entry.className = 'h1Entry';
+  $h1Entry.textContent = entry.title;
 
-  const $pEntry = document.createElement('p');
-  $pEntry.className = 'pEntry';
+  const $pElement = document.createElement('p');
+  $pElement.textContent = entry.notes;
 
   $entryList.appendChild($entryDiv);
   $entryDiv.appendChild($entryImg);
   $otherDiv.appendChild($h1Entry);
-  $otherDiv.appendChild($entryList);
+  $otherDiv.appendChild($pElement);
+  $entryList.appendChild($otherDiv);
 
   return $entryList;
 }

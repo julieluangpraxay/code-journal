@@ -25,9 +25,3 @@ $submitForm.addEventListener('submit', function (event) {
   $image.src = './images/placeholder-image-square.jpg';
   $submitForm.reset();
 });
-
-// other way to write function code block
-// $submit.addEventListener('submit', handleSubmit);
-// function handleSubmit(event) {
-
-// }

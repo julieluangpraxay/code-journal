@@ -14,15 +14,72 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Proza+Libre&display=swap"
+      rel="stylesheet" />
   </head>
+
   <body>
     <header>
-      <div class="container"></div>
+      <!-- entire page parent is "container" -->
+      <div class="container">
+        <!-- parent for "code journal" text on top of page -->
+        <div class="row">
+          <!-- child of row is column-full -->
+          <div class="column-full">Code Journal</div>
+        </div>
+      </div>
     </header>
-    <main class="container">
-      <div data-view="entry-form"></div>
-      <div data-view="entries" class="hidden"></div>
-    </main>
+    <!-- form starts -->
+    <form action="" method="post">
+      <!-- parent of form -->
+      <main class="container">
+        <div data-view="entry-form" class="entry-form">
+          <div class="entry-area">
+            <!-- make a row and column full for new entry header -->
+            <div class="row">
+              <div class="column-full">
+                <h1>New Entry</h1>
+              </div>
+            </div>
+            <!-- row that contains 2 column halfs of img and text boxes -->
+            <div class="row">
+              <div class="column-half">
+                <img
+                  src="./images/placeholder-image-square.jpg"
+                  id="photo-preview"
+                  alt="placeholder blank image" />
+              </div>
+              <!-- title text box -->
+              <div class="column-half title">
+                <label for="title-text"> Title </label>
+                <input type="text" id="title-text" name="title-text" required />
+                <!-- photo url text box -->
+                <label for="photo-url"> Photo URL </label>
+                <input id="photo-url" name="photo-url" required />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full">
+              <!-- note taking text box code-->
+              <label for="notes" class="notes">Notes</label>
+              <textarea id="notes" name="notes"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="column-full btn">
+              <button>SAVE</button>
+            </div>
+          </div>
+        </div>
+        <div data-view="entries" class="hidden"></div>
+      </main>
+    </form>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>

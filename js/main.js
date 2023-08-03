@@ -65,3 +65,20 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $ul.appendChild($data);
   }
 });
+
+//  Create a function named toggleNoEntries which toggles the no entries text to show or hide when the function is called.
+const $noEntries = document.querySelector('.no-entries');
+function toggleNoEntries() {
+  if (data.entries.length > 0) {
+    $noEntries.classList.add('hidden');
+  } else {
+    $noEntries.classList.remove('hidden');
+  }
+}
+
+toggleNoEntries();
+
+//  const
+//  function viewSwap(entries) {
+
+//  }

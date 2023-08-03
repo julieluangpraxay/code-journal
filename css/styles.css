@@ -87,3 +87,7 @@ textarea {
   padding-top: 20px;
   padding-bottom: 10px;
 }
+
+.no-entries {
+  text-align: center;
+}

@@ -78,7 +78,24 @@ function toggleNoEntries() {
 
 toggleNoEntries();
 
-//  const
-//  function viewSwap(entries) {
+const entriesView = document.querySelector('.entries');
+const entryFormView = document.querySelector('.entry-form');
 
-//  }
+function viewSwap(viewName) {
+  if (viewName === 'entries') {
+    entriesView.classList.remove('hidden');
+    entryFormView.classList.add('hidden');
+  } else if (viewName === 'entry-form') {
+    entriesView.classList.add('hidden');
+    entryFormView.classList.remove('hidden');
+  }
+  data.view = viewName;
+}
+
+document.querySelector('a').addEventListener('click', function () {
+  viewSwap('entries');
+});
+
+document.querySelector('.new').addEventListener('click', function () {
+  viewSwap('entry-form');
+});

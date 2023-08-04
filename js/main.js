@@ -44,6 +44,7 @@ function renderEntry(entry) {
 
   const $entryImg = document.createElement('img');
   $entryImg.setAttribute('src', entry.photoURL);
+  $entryImg.setAttribute('alt', entry.title);
 
   const $otherDiv = document.createElement('div');
   $otherDiv.className = 'column-half';
@@ -69,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
     const $data = renderEntry(data.entries[i]);
     $ul.appendChild($data);
   }
+  toggleNoEntries();
+  viewSwap('entry-form');
 });
 
 //  Create a function named toggleNoEntries which toggles the no entries text to show or hide when the function is called.
@@ -80,8 +83,6 @@ function toggleNoEntries() {
     $noEntries.classList.remove('hidden');
   }
 }
-
-toggleNoEntries();
 
 const entriesView = document.querySelector('.entries');
 const entryFormView = document.querySelector('.entry-form');

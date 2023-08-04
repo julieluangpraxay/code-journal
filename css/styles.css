@@ -111,3 +111,7 @@ textarea {
 .no-entries {
   text-align: center;
 }
+
+ul {
+  padding: 0;
+}

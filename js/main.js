@@ -23,8 +23,13 @@ $submitForm.addEventListener('submit', function (event) {
 
   data.nextEntryId++;
   data.entries.unshift(formData);
+
+  $ul.prepend(renderEntry(formData));
+  viewSwap('entries');
+
   $image.src = './images/placeholder-image-square.jpg';
   $submitForm.reset();
+  // toggleNoEntries();
 });
 
 // issue 2 code

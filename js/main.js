@@ -29,7 +29,7 @@ $submitForm.addEventListener('submit', function (event) {
 
   $image.src = './images/placeholder-image-square.jpg';
   $submitForm.reset();
-  // toggleNoEntries();
+  toggleNoEntries();
 });
 
 // issue 2 code
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $ul.appendChild($data);
   }
   toggleNoEntries();
-  viewSwap('entry-form');
+  viewSwap(data.view);
 });
 
 //  Create a function named toggleNoEntries which toggles the no entries text to show or hide when the function is called.

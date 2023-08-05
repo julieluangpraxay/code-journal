@@ -30,15 +30,18 @@
         <!-- parent for "code journal" text on top of page -->
         <div class="row">
           <!-- child of row is column-full -->
-          <div class="column-full">Code Journal</div>
+          <nav class="navbar column-full">
+            <span>Code Journal</span>
+            <a href="#" id="show-entries" class="show-entries">Entries</a>
+          </nav>
         </div>
       </div>
     </header>
     <!-- form starts -->
-    <form action="" method="post">
-      <!-- parent of form -->
-      <main class="container">
-        <div data-view="entry-form" class="entry-form">
+    <!-- parent of form -->
+    <main class="container">
+      <div data-view="entry-form" class="entry-form">
+        <form action="" method="post">
           <div class="entry-area">
             <!-- make a row and column full for new entry header -->
             <div class="row">
@@ -50,7 +53,7 @@
             <div class="row">
               <div class="column-half">
                 <img
-                  src="./images/placeholder-image-square.jpg"
+                  src="/images/placeholder-image-square.jpg"
                   id="photo-preview"
                   alt="placeholder blank image" />
               </div>
@@ -76,10 +79,21 @@
               <button>SAVE</button>
             </div>
           </div>
+        </form>
+      </div>
+      <div data-view="entries" class="entries hidden">
+        <div class="row entries-row">
+          <div>
+            <h1>Entries</h1>
+          </div>
+          <div>
+            <button class="new-button new">NEW</button>
+          </div>
         </div>
-        <div data-view="entries" class="hidden"></div>
-      </main>
-    </form>
+        <p class="no-entries">No entries have been recorded.</p>
+        <ul class="entry-list"></ul>
+      </div>
+    </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>

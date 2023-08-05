@@ -7,6 +7,25 @@ body {
   font-size: 16px;
 }
 
+.show-entries {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.new-button {
+  background-color: #562b81;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  padding: 10px 12px;
+}
+
+.entries-row {
+  justify-content: space-between;
+  align-items: center;
+}
+
 header {
   background: #562b81;
   padding: 0.9rem 0;
@@ -18,6 +37,7 @@ header {
 
 h1 {
   font-family: 'Proza Libre', sans-serif;
+  display: inline-block;
 }
 
 button {
@@ -86,4 +106,12 @@ textarea {
 .notes {
   padding-top: 20px;
   padding-bottom: 10px;
+}
+
+.no-entries {
+  text-align: center;
+}
+
+ul {
+  padding: 0;
 }

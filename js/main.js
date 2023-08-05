@@ -1,4 +1,3 @@
-// issue 1 code
 const $photoUrl = document.querySelector('#photo-url');
 const $image = document.querySelector('img');
 
@@ -32,12 +31,11 @@ $submitForm.addEventListener('submit', function (event) {
   toggleNoEntries();
 });
 
-// issue 2 code
-
 function renderEntry(entry) {
   // generate and return a DOM tree for a single entry that matches the entries created in the unordered list
   const $entryList = document.createElement('li');
   $entryList.className = 'row';
+  $entryList.setAttribute('data-entry-id', entry.entryId);
 
   const $entryDiv = document.createElement('div');
   $entryDiv.className = 'column-half';
@@ -55,9 +53,19 @@ function renderEntry(entry) {
   const $pElement = document.createElement('p');
   $pElement.textContent = entry.notes;
 
+  // wrapper div for pencil and title
+  const $titleWrapper = document.createElement('div');
+  $titleWrapper.setAttribute('class', 'title-wrapper');
+
+  // pencil icon
+  const $pencilIcon = document.createElement('i');
+  $pencilIcon.className = 'fa fa-pencil';
+
+  $titleWrapper.appendChild($h1Entry);
+  $titleWrapper.appendChild($pencilIcon);
+  $otherDiv.appendChild($titleWrapper);
   $entryList.appendChild($entryDiv);
   $entryDiv.appendChild($entryImg);
-  $otherDiv.appendChild($h1Entry);
   $otherDiv.appendChild($pElement);
   $entryList.appendChild($otherDiv);
 
@@ -104,4 +112,9 @@ document.querySelector('a').addEventListener('click', function () {
 
 document.querySelector('.new').addEventListener('click', function () {
   viewSwap('entry-form');
+});
+
+// Add an event listener to the ul in the entries view which does the following when an entry's pencil icon is clicked:
+$ul.addEventListener('click', function (event) {
+  // Check if the clicked element or its parent has the class 'fa-pencil' (Font Awesome pencil icon)
 });

@@ -48,12 +48,13 @@ $submitForm.addEventListener('submit', function (event) {
 
     $entryTitle.textContent = 'New Entry';
     viewSwap('entries');
-    data.editing = 'null';
+    data.editing = null;
   }
 });
 
 function renderEntry(entry) {
   // generate and return a DOM tree for a single entry that matches the entries created in the unordered list
+
   const $entryList = document.createElement('li');
   $entryList.className = 'row';
   $entryList.setAttribute('data-entry-id', entry.entryId);
@@ -65,8 +66,8 @@ function renderEntry(entry) {
   $entryImg.setAttribute('src', entry.photoURL);
   $entryImg.setAttribute('alt', entry.title);
 
-  const $otherDiv = document.createElement('div');
-  $otherDiv.className = 'column-half';
+  const $imgDiv = document.createElement('div');
+  $imgDiv.className = 'column-half';
 
   const $h1Entry = document.createElement('h1');
   $h1Entry.textContent = entry.title;
@@ -83,14 +84,12 @@ function renderEntry(entry) {
   $pencilIcon.className = 'fa fa-pencil';
 
   $entryList.appendChild($entryDiv);
-  $entryDiv.appendChild($otherDiv);
-  $entryDiv.appendChild($titleWrapper);
-
-  $otherDiv.appendChild($entryImg);
+  $entryDiv.appendChild($entryImg);
+  $entryList.appendChild($imgDiv);
+  $imgDiv.appendChild($titleWrapper);
   $titleWrapper.appendChild($h1Entry);
   $titleWrapper.appendChild($pencilIcon);
-
-  $titleWrapper.appendChild($pElement);
+  $imgDiv.appendChild($pElement);
 
   return $entryList;
 }
@@ -140,6 +139,10 @@ document.querySelector('.new').addEventListener('click', function () {
 // Add an event listener to the ul in the entries view which does the following when an entry's pencil icon is clicked:
 $ul.addEventListener('click', pencilClick);
 
+const $title = document.querySelector('#title-text');
+const $notes = document.querySelector('#notes');
+const $entryTitle = document.querySelector('.entry-title');
+
 function pencilClick(event) {
   // if pencil is clicked and it is the i element?
   if (event.target.tagName === 'I') {
@@ -162,7 +165,3 @@ function pencilClick(event) {
     }
   }
 }
-
-const $title = document.querySelector('#title-text');
-const $notes = document.querySelector('#notes');
-const $entryTitle = document.querySelector('.entry-title');

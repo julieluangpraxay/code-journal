@@ -23,9 +23,7 @@ $submitForm.addEventListener('submit', function (event) {
   if (data.editing === null) {
     data.nextEntryId++;
     data.entries.unshift(formData);
-
     $ul.prepend(renderEntry(formData));
-
     $image.src = './images/placeholder-image-square.jpg';
     $submitForm.reset();
     toggleNoEntries();
@@ -144,7 +142,7 @@ const $notes = document.querySelector('#notes');
 const $entryTitle = document.querySelector('.entry-title');
 
 function pencilClick(event) {
-  // if pencil is clicked and it is the i element?
+  // if pencil is clicked and it is the I element
   if (event.target.tagName === 'I') {
     const dataEntryId = event.target
       .closest('li')

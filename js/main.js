@@ -17,18 +17,39 @@ $submitForm.addEventListener('submit', function (event) {
     title: $titleValue,
     photoURL: $photoUrlValue,
     notes: $notesValue,
-    entryID: data.nextEntryId,
+    entryId: data.nextEntryId,
   };
 
-  data.nextEntryId++;
-  data.entries.unshift(formData);
+  if (data.editing === null) {
+    data.nextEntryId++;
+    data.entries.unshift(formData);
 
-  $ul.prepend(renderEntry(formData));
-  viewSwap('entries');
+    $ul.prepend(renderEntry(formData));
 
-  $image.src = './images/placeholder-image-square.jpg';
-  $submitForm.reset();
-  toggleNoEntries();
+    $image.src = './images/placeholder-image-square.jpg';
+    $submitForm.reset();
+    toggleNoEntries();
+  } else {
+    // Assign the entry id value from data.editing to the new object with the updated form values.
+    data.editing.entryId = formData.entryId;
+    //  Replace the original object in the data.entries array for the edited entry with the new object with the edited data.
+    data.entries[data.entries.length - formData.entryId] = formData;
+    // query for all li elements
+    const $liElements = document.querySelectorAll('li');
+    // Render a new DOM tree for the new object with the updated data, and replace the original li with the matching data - entry - id value with the new generated DOM tree.
+    for (let i = 0; i < $liElements.length; i++) {
+      if (
+        formData.entryId ===
+        Number($liElements[i].getAttribute('data-entry-id'))
+      ) {
+        $liElements[i].replaceWith(renderEntry(formData));
+      }
+    }
+
+    $entryTitle.textContent = 'New Entry';
+    viewSwap('entries');
+    data.editing = 'null';
+  }
 });
 
 function renderEntry(entry) {
@@ -61,13 +82,15 @@ function renderEntry(entry) {
   const $pencilIcon = document.createElement('i');
   $pencilIcon.className = 'fa fa-pencil';
 
+  $entryList.appendChild($entryDiv);
+  $entryDiv.appendChild($otherDiv);
+  $entryDiv.appendChild($titleWrapper);
+
+  $otherDiv.appendChild($entryImg);
   $titleWrapper.appendChild($h1Entry);
   $titleWrapper.appendChild($pencilIcon);
-  $otherDiv.appendChild($titleWrapper);
-  $entryList.appendChild($entryDiv);
-  $entryDiv.appendChild($entryImg);
-  $otherDiv.appendChild($pElement);
-  $entryList.appendChild($otherDiv);
+
+  $titleWrapper.appendChild($pElement);
 
   return $entryList;
 }
@@ -115,6 +138,31 @@ document.querySelector('.new').addEventListener('click', function () {
 });
 
 // Add an event listener to the ul in the entries view which does the following when an entry's pencil icon is clicked:
-$ul.addEventListener('click', function (event) {
-  // Check if the clicked element or its parent has the class 'fa-pencil' (Font Awesome pencil icon)
-});
+$ul.addEventListener('click', pencilClick);
+
+function pencilClick(event) {
+  // if pencil is clicked and it is the i element?
+  if (event.target.tagName === 'I') {
+    const dataEntryId = event.target
+      .closest('li')
+      .getAttribute('data-entry-id');
+    // Use the viewSwap function to show the form if its true
+    viewSwap('entry-form');
+
+    // loop through all the array indexes to match the entry id
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === Number(dataEntryId)) {
+        data.editing = data.entries[i];
+        $title.value = data.editing.title;
+        $notes.value = data.editing.notes;
+        $image.setAttribute('src', data.editing.photoURL);
+        $photoUrl.value = data.editing.photoURL;
+        $entryTitle.textContent = 'Edit Entry';
+      }
+    }
+  }
+}
+
+const $title = document.querySelector('#title-text');
+const $notes = document.querySelector('#notes');
+const $entryTitle = document.querySelector('.entry-title');

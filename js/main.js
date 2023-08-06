@@ -24,15 +24,16 @@ $submitForm.addEventListener('submit', function (event) {
     data.nextEntryId++;
     data.entries.unshift(formData);
     $ul.prepend(renderEntry(formData));
-    $image.src = './images/placeholder-image-square.jpg';
-    $submitForm.reset();
-    toggleNoEntries();
   } else {
-    // Assign the entry id value from data.editing to the new object with the updated form values.
-    data.editing.entryId = formData.entryId;
-    //  Replace the original object in the data.entries array for the edited entry with the new object with the edited data.
-    data.entries[data.entries.length - formData.entryId] = formData;
-    // query for all li elements
+    // new code loop
+    formData.entryId = data.editing.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === formData.entryId) {
+        data.entries[i] = formData;
+        $image.src = './images/placeholder-image-square.jpg';
+        $submitForm.reset();
+      }
+    }
     const $liElements = document.querySelectorAll('li');
     // Render a new DOM tree for the new object with the updated data, and replace the original li with the matching data - entry - id value with the new generated DOM tree.
     for (let i = 0; i < $liElements.length; i++) {
@@ -43,11 +44,11 @@ $submitForm.addEventListener('submit', function (event) {
         $liElements[i].replaceWith(renderEntry(formData));
       }
     }
-
     $entryTitle.textContent = 'New Entry';
-    viewSwap('entries');
     data.editing = null;
   }
+  viewSwap('entries');
+  toggleNoEntries();
 });
 
 function renderEntry(entry) {
@@ -125,7 +126,7 @@ function viewSwap(viewName) {
   }
   data.view = viewName;
 }
-
+// when you click entries on the top it will show all the entries
 document.querySelector('a').addEventListener('click', function () {
   viewSwap('entries');
 });
@@ -147,8 +148,6 @@ function pencilClick(event) {
     const dataEntryId = event.target
       .closest('li')
       .getAttribute('data-entry-id');
-    // Use the viewSwap function to show the form if its true
-    viewSwap('entry-form');
 
     // loop through all the array indexes to match the entry id
     for (let i = 0; i < data.entries.length; i++) {
@@ -160,6 +159,8 @@ function pencilClick(event) {
         $photoUrl.value = data.editing.photoURL;
         $entryTitle.textContent = 'Edit Entry';
       }
+      // Use the viewSwap function to show the form if its true
+      viewSwap('entry-form');
     }
   }
 }

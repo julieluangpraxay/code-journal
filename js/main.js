@@ -150,7 +150,6 @@ function pencilClick(event) {
     const dataEntryId = event.target
       .closest('li')
       .getAttribute('data-entry-id');
-
     // loop through all the array indexes to match the entry id
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === Number(dataEntryId)) {
@@ -161,8 +160,11 @@ function pencilClick(event) {
         $photoUrl.value = data.editing.photoURL;
         $entryTitle.textContent = 'Edit Entry';
       }
+      if (data.editing) {
+        document.querySelector('.delete-button').classList.remove('hidden');
+      }
       // Use the viewSwap function to show the form if its true
-      viewSwap('entry-form');
     }
+    viewSwap('entry-form');
   }
 }

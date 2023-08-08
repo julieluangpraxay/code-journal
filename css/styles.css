@@ -40,9 +40,8 @@ h1 {
   display: inline-block;
 }
 
-button {
+.save-button {
   background-color: #562b81;
-  margin-right: 1rem;
   padding: 0.4rem;
   width: 5rem;
   border-radius: 0.5rem;
@@ -128,4 +127,8 @@ ul {
   font-size: 16px;
   width: auto;
   margin-left: 10px;
+}
+
+.delete-half {
+  align-items: left;
 }

@@ -1,4 +1,3 @@
-// issue 1 code
 const $photoUrl = document.querySelector('#photo-url');
 const $image = document.querySelector('img');
 
@@ -18,26 +17,48 @@ $submitForm.addEventListener('submit', function (event) {
     title: $titleValue,
     photoURL: $photoUrlValue,
     notes: $notesValue,
-    entryID: data.nextEntryId,
+    entryId: data.nextEntryId,
   };
 
-  data.nextEntryId++;
-  data.entries.unshift(formData);
+  if (data.editing === null) {
+    data.nextEntryId++;
+    data.entries.unshift(formData);
+    $ul.prepend(renderEntry(formData));
+    $image.src = './images/placeholder-image-square.jpg';
+  } else {
+    // new code loop
+    formData.entryId = data.editing.entryId;
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === formData.entryId) {
+        data.entries[i] = formData;
+      }
+    }
+    const $liElements = document.querySelectorAll('li');
+    // Render a new DOM tree for the new object with the updated data, and replace the original li with the matching data - entry - id value with the new generated DOM tree.
+    for (let i = 0; i < $liElements.length; i++) {
+      if (
+        formData.entryId ===
+        Number($liElements[i].getAttribute('data-entry-id'))
+      ) {
+        $image.src = './images/placeholder-image-square.jpg';
+        $liElements[i].replaceWith(renderEntry(formData));
+      }
+    }
+    $entryTitle.textContent = 'New Entry';
+    data.editing = null;
+  }
 
-  $ul.prepend(renderEntry(formData));
   viewSwap('entries');
-
-  $image.src = './images/placeholder-image-square.jpg';
-  $submitForm.reset();
   toggleNoEntries();
+  $submitForm.reset();
 });
-
-// issue 2 code
 
 function renderEntry(entry) {
   // generate and return a DOM tree for a single entry that matches the entries created in the unordered list
+
   const $entryList = document.createElement('li');
   $entryList.className = 'row';
+  $entryList.setAttribute('data-entry-id', entry.entryId);
 
   const $entryDiv = document.createElement('div');
   $entryDiv.className = 'column-half';
@@ -46,8 +67,8 @@ function renderEntry(entry) {
   $entryImg.setAttribute('src', entry.photoURL);
   $entryImg.setAttribute('alt', entry.title);
 
-  const $otherDiv = document.createElement('div');
-  $otherDiv.className = 'column-half';
+  const $imgDiv = document.createElement('div');
+  $imgDiv.className = 'column-half';
 
   const $h1Entry = document.createElement('h1');
   $h1Entry.textContent = entry.title;
@@ -55,11 +76,21 @@ function renderEntry(entry) {
   const $pElement = document.createElement('p');
   $pElement.textContent = entry.notes;
 
+  // wrapper div for pencil and title
+  const $titleWrapper = document.createElement('div');
+  $titleWrapper.setAttribute('class', 'title-wrapper');
+
+  // pencil icon
+  const $pencilIcon = document.createElement('i');
+  $pencilIcon.className = 'fa fa-pencil';
+
   $entryList.appendChild($entryDiv);
   $entryDiv.appendChild($entryImg);
-  $otherDiv.appendChild($h1Entry);
-  $otherDiv.appendChild($pElement);
-  $entryList.appendChild($otherDiv);
+  $entryList.appendChild($imgDiv);
+  $imgDiv.appendChild($titleWrapper);
+  $titleWrapper.appendChild($h1Entry);
+  $titleWrapper.appendChild($pencilIcon);
+  $imgDiv.appendChild($pElement);
 
   return $entryList;
 }
@@ -97,7 +128,7 @@ function viewSwap(viewName) {
   }
   data.view = viewName;
 }
-
+// when you click entries on the top it will show all the entries
 document.querySelector('a').addEventListener('click', function () {
   viewSwap('entries');
 });
@@ -105,3 +136,33 @@ document.querySelector('a').addEventListener('click', function () {
 document.querySelector('.new').addEventListener('click', function () {
   viewSwap('entry-form');
 });
+
+// Add an event listener to the ul in the entries view which does the following when an entry's pencil icon is clicked:
+$ul.addEventListener('click', pencilClick);
+
+const $title = document.querySelector('#title-text');
+const $notes = document.querySelector('#notes');
+const $entryTitle = document.querySelector('.entry-title');
+
+function pencilClick(event) {
+  // if pencil is clicked and it is the I element
+  if (event.target.tagName === 'I') {
+    const dataEntryId = event.target
+      .closest('li')
+      .getAttribute('data-entry-id');
+
+    // loop through all the array indexes to match the entry id
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === Number(dataEntryId)) {
+        data.editing = data.entries[i];
+        $title.value = data.editing.title;
+        $notes.value = data.editing.notes;
+        $image.setAttribute('src', data.editing.photoURL);
+        $photoUrl.value = data.editing.photoURL;
+        $entryTitle.textContent = 'Edit Entry';
+      }
+      // Use the viewSwap function to show the form if its true
+      viewSwap('entry-form');
+    }
+  }
+}

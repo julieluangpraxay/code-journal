@@ -21,6 +21,12 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&family=Proza+Libre&display=swap"
       rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
   </head>
 
   <body>
@@ -46,7 +52,7 @@
             <!-- make a row and column full for new entry header -->
             <div class="row">
               <div class="column-full">
-                <h1>New Entry</h1>
+                <h1 class="entry-title">New Entry</h1>
               </div>
             </div>
             <!-- row that contains 2 column halfs of img and text boxes -->
@@ -59,8 +65,10 @@
               </div>
               <!-- title text box -->
               <div class="column-half title">
+                <div class="row"></div>
                 <label for="title-text"> Title </label>
                 <input type="text" id="title-text" name="title-text" required />
+
                 <!-- photo url text box -->
                 <label for="photo-url"> Photo URL </label>
                 <input id="photo-url" name="photo-url" required />

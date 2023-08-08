@@ -2,10 +2,10 @@
 
 // Step 1: We create a new empty object called 'data' to store some information.
 let data = {
-  view: 'entry-form', // This part is a property called 'view', and it has the value 'entry-form'.
-  entries: [], // This part is a property called 'entries', and it has an empty list as its value.
-  editing: null, // This part is a property called 'editing', and it currently has no value (null).
-  nextEntryId: 1, // This part is a property called 'nextEntryId', and it has the value 1.
+  view: 'entry-form',
+  entries: [],
+  editing: null,
+  nextEntryId: 1,
 };
 
 // Step 2: We check if there is any previously saved information in the browser's memory.

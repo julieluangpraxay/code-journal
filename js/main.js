@@ -184,3 +184,14 @@ const $cancelButton = document.querySelector('.cancel-button');
 $cancelButton.addEventListener('click', function () {
   $popup.classList.add('hidden');
 });
+
+// when confirm is clicked, remove the entry
+const $confirmButton = document.querySelector('.confirm-button');
+$confirmButton.addEventListener('click', function () {
+  const dataEntryId = data.entries.entryId;
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === Number(dataEntryId)) {
+      data.entries[i].removeChild('li');
+    }
+  }
+});

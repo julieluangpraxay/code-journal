@@ -132,8 +132,9 @@ function viewSwap(viewName) {
 document.querySelector('a').addEventListener('click', function () {
   viewSwap('entries');
 });
-
+// when you click new, it goes to new entry
 document.querySelector('.new').addEventListener('click', function () {
+  document.querySelector('.delete-button').classList.add('hidden');
   viewSwap('entry-form');
 });
 
@@ -168,3 +169,10 @@ function pencilClick(event) {
     viewSwap('entry-form');
   }
 }
+
+const $delete = document.querySelector('.delete-button');
+const $popup = document.querySelector('.popup');
+
+$delete.addEventListener('click', function () {
+  $popup.classList.remove('hidden');
+});

@@ -171,8 +171,16 @@ function pencilClick(event) {
 }
 
 const $delete = document.querySelector('.delete-button');
+
 const $popup = document.querySelector('.popup');
 
+// when delete button is clicked, show the pop up modal by removing hidden from its class
 $delete.addEventListener('click', function () {
   $popup.classList.remove('hidden');
+});
+
+const $cancelButton = document.querySelector('.cancel-button');
+// hide the popup when "cancel" is clicked by removing the hidden class from popup
+$cancelButton.addEventListener('click', function () {
+  $popup.classList.add('hidden');
 });

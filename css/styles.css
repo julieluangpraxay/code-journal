@@ -145,6 +145,7 @@ ul {
   background-color: rgba(0, 0, 0, 0.7);
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .popup-content {
@@ -158,6 +159,8 @@ ul {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   justify-content: center;
   flex-direction: column;
+  width: 550px;
+  padding: 30px;
 }
 
 .confirm-button {
@@ -167,7 +170,4 @@ ul {
   border-radius: 0.3rem;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
-}
-
-@media only screen and {
 }

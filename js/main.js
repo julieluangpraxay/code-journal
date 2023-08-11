@@ -144,6 +144,7 @@ $ul.addEventListener('click', pencilClick);
 const $title = document.querySelector('#title-text');
 const $notes = document.querySelector('#notes');
 const $entryTitle = document.querySelector('.entry-title');
+let deleteEntryId = 0;
 
 function pencilClick(event) {
   // if pencil is clicked and it is the I element
@@ -163,35 +164,39 @@ function pencilClick(event) {
       }
       if (data.editing) {
         document.querySelector('.delete-button').classList.remove('hidden');
+        deleteEntryId = dataEntryId;
       }
       // Use the viewSwap function to show the form if its true
     }
     viewSwap('entry-form');
   }
 }
-
+// modal for delete popup
 const $delete = document.querySelector('.delete-button');
-
 const $popup = document.querySelector('.popup');
 
 // when delete button is clicked, show the pop up modal by removing hidden from its class
-$delete.addEventListener('click', function () {
+$delete.addEventListener('click', function (e) {
+  e.preventDefault();
   $popup.classList.remove('hidden');
 });
 
 const $cancelButton = document.querySelector('.cancel-button');
 // hide the popup when "cancel" is clicked by removing the hidden class from popup
 $cancelButton.addEventListener('click', function () {
+  deleteEntryId = 0;
   $popup.classList.add('hidden');
 });
+// end of popup
 
-// when confirm is clicked, remove the entry
-const $confirmButton = document.querySelector('.confirm-button');
-$confirmButton.addEventListener('click', function () {
-  const dataEntryId = data.entries.entryId;
+const $confirmDelete = document.querySelector('.confirm-button');
+$confirmDelete.addEventListener('click', function () {
+  const tempDeleteId = Number(deleteEntryId);
   for (let i = 0; i < data.entries.length; i++) {
-    if (data.entries[i].entryId === Number(dataEntryId)) {
-      data.entries[i].removeChild('li');
+    if (data.entries[i].entryId === tempDeleteId) {
+      data.entries.splice(i, 1);
+      $ul.children[i].remove();
     }
   }
+  $popup.classList.add('hidden');
 });

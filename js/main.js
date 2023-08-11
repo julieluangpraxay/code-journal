@@ -199,4 +199,5 @@ $confirmDelete.addEventListener('click', function () {
     }
   }
   $popup.classList.add('hidden');
+  // viewSwap('entries');
 });

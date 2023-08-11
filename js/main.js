@@ -135,6 +135,9 @@ document.querySelector('a').addEventListener('click', function () {
 document.querySelector('.new').addEventListener('click', function () {
   document.querySelector('.delete-button').classList.add('hidden');
   viewSwap('entry-form');
+  $image.src = './images/placeholder-image-square.jpg';
+  $entryTitle.textContent = 'New Entry';
+  $submitForm.reset();
 });
 
 // Add an event listener to the ul in the entries view which does the following when an entry's pencil icon is clicked:
@@ -197,6 +200,7 @@ $confirmDelete.addEventListener('click', function () {
       $ul.children[i].remove();
     }
   }
+
+  viewSwap('entries');
   $popup.classList.add('hidden');
-  // viewSwap('entries');
 });

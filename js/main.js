@@ -26,7 +26,6 @@ $submitForm.addEventListener('submit', function (event) {
     $ul.prepend(renderEntry(formData));
     $image.src = './images/placeholder-image-square.jpg';
   } else {
-    // new code loop
     formData.entryId = data.editing.entryId;
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === formData.entryId) {

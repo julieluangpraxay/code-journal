@@ -26,7 +26,6 @@ $submitForm.addEventListener('submit', function (event) {
     $ul.prepend(renderEntry(formData));
     $image.src = './images/placeholder-image-square.jpg';
   } else {
-    // new code loop
     formData.entryId = data.editing.entryId;
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === formData.entryId) {
@@ -132,9 +131,13 @@ function viewSwap(viewName) {
 document.querySelector('a').addEventListener('click', function () {
   viewSwap('entries');
 });
-
+// when you click new, it goes to new entry
 document.querySelector('.new').addEventListener('click', function () {
+  document.querySelector('.delete-button').classList.add('hidden');
   viewSwap('entry-form');
+  $image.src = './images/placeholder-image-square.jpg';
+  $entryTitle.textContent = 'New Entry';
+  $submitForm.reset();
 });
 
 // Add an event listener to the ul in the entries view which does the following when an entry's pencil icon is clicked:
@@ -143,6 +146,7 @@ $ul.addEventListener('click', pencilClick);
 const $title = document.querySelector('#title-text');
 const $notes = document.querySelector('#notes');
 const $entryTitle = document.querySelector('.entry-title');
+let deleteEntryId = 0;
 
 function pencilClick(event) {
   // if pencil is clicked and it is the I element
@@ -150,7 +154,6 @@ function pencilClick(event) {
     const dataEntryId = event.target
       .closest('li')
       .getAttribute('data-entry-id');
-
     // loop through all the array indexes to match the entry id
     for (let i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === Number(dataEntryId)) {
@@ -161,8 +164,43 @@ function pencilClick(event) {
         $photoUrl.value = data.editing.photoURL;
         $entryTitle.textContent = 'Edit Entry';
       }
+      if (data.editing) {
+        document.querySelector('.delete-button').classList.remove('hidden');
+        deleteEntryId = dataEntryId;
+      }
       // Use the viewSwap function to show the form if its true
-      viewSwap('entry-form');
     }
+    viewSwap('entry-form');
   }
 }
+// modal for delete popup
+const $delete = document.querySelector('.delete-button');
+const $popup = document.querySelector('.popup');
+
+// when delete button is clicked, show the pop up modal by removing hidden from its class
+$delete.addEventListener('click', function (e) {
+  e.preventDefault();
+  $popup.classList.remove('hidden');
+});
+
+const $cancelButton = document.querySelector('.cancel-button');
+// hide the popup when "cancel" is clicked by removing the hidden class from popup
+$cancelButton.addEventListener('click', function () {
+  deleteEntryId = 0;
+  $popup.classList.add('hidden');
+});
+// end of popup
+
+const $confirmDelete = document.querySelector('.confirm-button');
+$confirmDelete.addEventListener('click', function () {
+  const tempDeleteId = Number(deleteEntryId);
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === tempDeleteId) {
+      data.entries.splice(i, 1);
+      $ul.children[i].remove();
+    }
+  }
+
+  viewSwap('entries');
+  $popup.classList.add('hidden');
+});

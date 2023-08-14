@@ -40,9 +40,9 @@ h1 {
   display: inline-block;
 }
 
-button {
+.save-button {
   background-color: #562b81;
-  padding: 0.5rem;
+  padding: 0.4rem;
   width: 5rem;
   border-radius: 0.5rem;
   color: white;
@@ -51,10 +51,7 @@ button {
   border-style: solid;
   border-color: #562b81;
   font-family: 'Proza Libre', sans-serif;
-}
-
-.btn {
-  text-align: right;
+  margin-right: 1rem;
 }
 
 label {
@@ -120,4 +117,57 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.delete-button {
+  background-color: #f0f0f0;
+  color: red;
+  border: none;
+  text-decoration: underline;
+  text-align: left;
+  font-size: 16px;
+  width: auto;
+  margin-left: 10px;
+}
+
+.delete-half {
+  align-items: left;
+  margin-top: 1rem;
+}
+
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.popup-content {
+  position: absolute;
+  display: flex;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  justify-content: center;
+  flex-direction: column;
+  width: 550px;
+  padding: 30px;
+}
+
+.confirm-button {
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  border-radius: 0.3rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
 }
